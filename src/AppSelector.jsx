@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import App1 from './apps/App1';
-import App2 from './apps/App2';
-import App3 from './apps/App3';
+// import App2 from './apps/App2'; // DESACTIVADO
+// import App3 from './apps/App3'; // DESACTIVADO
+import App4 from './apps/App4'; // Training Course
 
 const AppSelector = () => {
   const [activeApp, setActiveApp] = useState('app1');
   
-  // Estado compartido para costes de viaje
+  // Estado compartido para costes de viaje (desactivado, pero mantenemos por si acaso)
   const [sharedTravelCosts, setSharedTravelCosts] = useState({
     M3: { travel: 825, daily: 3774, total: 4599 },
     M4: { travel: 0, daily: 3774, total: 3774 },
@@ -15,31 +16,33 @@ const AppSelector = () => {
     M8: { travel: 4125, daily: 59200, total: 63325 }
   });
 
+  // Flags para activar/desactivar apps
+  const ENABLE_APP2 = false;
+  const ENABLE_APP3 = false;
+  const ENABLE_APP4 = true;
+
   const apps = [
-    { 
-      id: 'app1', 
-      name: '📊 Presentación Proyecto', 
-      component: <App1 /> 
-    },
-    { 
-      id: 'app2', 
-      name: '✈️ Calculadora Viajes', 
-      component: <App2 
-        travelCosts={sharedTravelCosts} 
-        setTravelCosts={setSharedTravelCosts} 
-      /> 
-    },
-    { 
-      id: 'app3', 
-      name: '💰 Presupuesto General', 
-      component: <App3 
-        travelCosts={sharedTravelCosts} 
-        setTravelCosts={setSharedTravelCosts} 
-      /> 
-    }
+    { id: 'app1', name: '📊 Presentación Proyecto', component: <App1 /> },
+    // App2 condicional
+    ...(ENABLE_APP2 ? [{
+      id: 'app2',
+      name: '✈️ Calculadora Viajes',
+      component: <App2 travelCosts={sharedTravelCosts} setTravelCosts={setSharedTravelCosts} />
+    }] : []),
+    // App3 condicional
+    ...(ENABLE_APP3 ? [{
+      id: 'app3',
+      name: '💰 Presupuesto General',
+      component: <App3 travelCosts={sharedTravelCosts} setTravelCosts={setSharedTravelCosts} />
+    }] : []),
+    // App4 condicional
+    ...(ENABLE_APP4 ? [{
+      id: 'app4',
+      name: '🧑‍🍳 Training Course',
+      component: <App4 />
+    }] : [])
   ];
 
-  // Encuentra la app activa
   const activeAppData = apps.find(app => app.id === activeApp);
 
   return (
@@ -87,8 +90,9 @@ const AppSelector = () => {
               </h2>
               <p className="text-blue-700 text-sm">
                 {activeApp === 'app1' && 'Presentación completa del proyecto KA210'}
-                {activeApp === 'app2' && 'Calculadora de viajes y manutención para actividades'}
-                {activeApp === 'app3' && 'Presupuesto general ajustable con todas las partidas'}
+                {activeApp === 'app2' && ENABLE_APP2 && 'Calculadora de viajes y manutención para actividades'}
+                {activeApp === 'app3' && ENABLE_APP3 && 'Presupuesto general ajustable con todas las partidas'}
+                {activeApp === 'app4' && ENABLE_APP4 && 'Diseño del Training Course para Embajadores Food Heritage'}
               </p>
             </div>
           </div>
@@ -103,7 +107,12 @@ const AppSelector = () => {
       {/* Footer */}
       <div className="bg-white border-t border-gray-200 py-6">
         <div className="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
-          <p>🧠 <strong>Recordatorio:</strong> Las tres apps son complementarias. Usa App2 para calcular viajes, App3 para el presupuesto completo, y App1 para presentar el proyecto.</p>
+          <p>🧠 <strong>Recordatorio:</strong> 
+            {ENABLE_APP2 && ' Usa App2 para calcular viajes,'}
+            {ENABLE_APP3 && ' App3 para el presupuesto completo,'}
+            {ENABLE_APP4 && ' App4 para el diseño del Training Course,'}
+            y App1 para presentar el proyecto.
+          </p>
           <p className="mt-2">📅 Fecha límite KA210: <strong>1 de octubre de 2025</strong></p>
         </div>
       </div>

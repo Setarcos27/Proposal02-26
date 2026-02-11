@@ -1,17 +1,16 @@
-// ============================================
-// ARCHIVO PRINCIPAL: ProjectPresentation.jsx
-// ============================================
-
 import React, { useState } from 'react';
-import { 
-  Target, AlertCircle, Users, Globe, 
+import {
+  Target, AlertCircle, Users, Globe,
   ChevronDown, Calendar, Package, Brain,
   ChefHat, Map, Car, BookOpen, Heart,
-  Utensils, Leaf, Smartphone, Network
+  Utensils, Leaf, Smartphone, Network, Sparkles
 } from 'lucide-react';
 
 // ============================================
-// 1. DATOS DEL PROYECTO (Food Heritage Hubs)
+// 1. DATOS DEL PROYECTO (versión actualizada)
+// ============================================
+// ============================================
+// 1. DATOS DEL PROYECTO (versión con turismo)
 // ============================================
 
 const projectData = {
@@ -42,11 +41,11 @@ const projectData = {
     },
     {
       id: 4,
-      title: "Desperdicio alimentario en hogares jóvenes",
-      briefDescription: "Falta de habilidades para planificar, comprar y aprovechar alimentos",
-      evidence: "Cada español desperdicia 77kg de comida al año, los jóvenes lideran la estadística",
-      affectedGroups: ["Estudiantes universitarios", "Jóvenes emancipados", "Hogares unipersonales"],
-      keyData: "El 60% del desperdicio ocurre en hogares"
+      title: "Turismo desequilibrado y pérdida de identidad rural",
+      briefDescription: "El turismo masivo se concentra en pocos destinos, mientras los pueblos con valioso patrimonio gastronómico quedan invisibilizados",
+      evidence: "El 80% del turismo rural en España se concentra en menos del 20% de los municipios (INE, 2024)",
+      affectedGroups: ["Comunidades rurales", "Pequeños productores", "Jóvenes que emigran"],
+      keyData: "Solo el 15% de los viajeros elige destino por su gastronomía tradicional (Encuesta Turismo Rural, 2023)"
     }
   ],
 
@@ -54,217 +53,268 @@ const projectData = {
     individual: [
       "80% de participantes aumentan conocimientos sobre sistemas alimentarios sostenibles",
       "70% mejoran habilidades culinarias básicas (5+ platos tradicionales)",
-      "90% valoran positivamente el intercambio intergeneracional",
-      "Reducción del 40% en desperdicio alimentario personal"
+      "90% valoran positivamente el intercambio intergeneracional"
     ],
     organizacional: [
-      "Creación de 3 'Food Heritage Hubs' permanentes (Andalucía, Galicia, Italia)",
-      "15 jóvenes certificados como 'Embajadores Food Heritage'",
-      "12+ eventos de réplica autogestionados post-proyecto",
-      "Plataforma digital con 1000+ usuarios anuales"
+      "8-10 jóvenes certificados como 'Embajadores Food Heritage'",
+      "6+ eventos de réplica autogestionados post-proyecto",
+      "Web del proyecto con 300+ visitas durante el proyecto"
     ],
     comunitario: [
-      "30+ recetas tradicionales documentadas y preservadas",
-      "200+ conexiones intergeneracionales creadas",
-      "300+ kg de alimentos rescatados del desperdicio",
-      "3 políticas locales incorporan recomendaciones del proyecto"
+      "20 recetas tradicionales documentadas y preservadas",
+      "80+ conexiones intergeneracionales creadas",
+      "2-3 espacios comunitarios dinamizados alrededor de la cocina",
+      "Modelo de turismo gastronómico comunitario validado y transferible, con 2-3 pueblos piloto que incorporan las rutas como oferta cultural",
+      "5+ iniciativas locales inspiradas en el proyecto (eventos, menús tradicionales, visitas guiadas)"
     ]
   },
 
   objectives: [
     {
       id: 1,
-      conciseStatement: "Documentar 30+ recetas tradicionales de 3 ecosistemas europeos (Mediterráneo, Montaña, Atlántico)",
+      conciseStatement: "Documentar 20 recetas tradicionales de 2 ecosistemas europeos (Andalucía e Italia)",
       tags: ["Patrimonio", "Investigación", "Digital"],
-      detailedDescription: "Recopilación etnográfica de recetas con su contexto socio-ecológico, análisis de sostenibilidad y creación de archivo digital trilingüe accesible.",
+      detailedDescription: "Recopilación etnográfica de recetas con su contexto socio-ecológico, análisis de sostenibilidad y creación de archivo digital bilingüe (español-italiano) accesible.",
       indicators: [
-        "10 recetas por ecosistema documentadas profesionalmente",
-        "100% de fichas con análisis nutricional y ambiental",
+        "10 recetas por ruta documentadas profesionalmente",
+        "100% de fichas con análisis nutricional y de estacionalidad",
         "Archivo digital publicado bajo licencia Creative Commons",
-        "3 documentales breves (15 min cada uno)"
+        "1 vídeo resumen del proceso de documentación"
       ],
-      timeline: "Meses 1-12 (concentrado en meses 4-10 para trabajo de campo)",
-      responsible: ["Violeta (Agroalimentación)", "Universidad de Córdoba", "Todos los socios"],
-      evaluationMethod: "Revisión por pares externos + métricas de acceso digital"
+      timeline: "Meses 1-12 (trabajo de campo en rutas)",
+      responsible: ["Violeta (Agroalimentación)", "Arci Chieti", "Universidad de Córdoba (apoyo)"],
+      evaluationMethod: "Revisión por pares + métricas de acceso digital"
     },
     {
       id: 2,
-      conciseStatement: "Formar 15 jóvenes como 'Embajadores Food Heritage' en competencias culinarias y comunitarias",
+      conciseStatement: "Formar 8-10 jóvenes como 'Embajadores Food Heritage' en competencias culinarias y comunitarias",
       tags: ["Formación", "Juventud", "Liderazgo"],
-      detailedDescription: "Programa formativo blended (online + presencial) con módulos en sistemas alimentarios críticos, técnicas culinarias, facilitación comunitaria y comunicación digital.",
+      detailedDescription: "Programa formativo residencial con módulos en cocina tradicional, facilitación comunitaria y comunicación digital. Los embajadores diseñarán y ejecutarán un mini-evento en su localidad.",
       indicators: [
-        "15 jóvenes certificados (5 por país)",
+        "8-10 jóvenes certificados (4-5 por país)",
         "Portfolio individual de proyectos implementados",
-        "12+ eventos organizados por los embajadores post-formación",
-        "90% de satisfacción en evaluación del curso"
+        "6+ eventos de réplica organizados post-formación",
+        "85% de satisfacción en evaluación del curso"
       ],
-      timeline: "Training Course: Mes 8 (10 días) + Mentoría: Meses 9-18",
+      timeline: "Training Course: Mes 10 (7 días) + Mentoría: Meses 11-18",
       responsible: ["Belen (Formación)", "Chefs locales", "Facilitadores comunitarios"],
-      evaluationMethod: "Evaluación 360° + seguimiento de proyectos implementados"
+      evaluationMethod: "Evaluación 360° + seguimiento de proyectos"
     },
     {
       id: 3,
-      conciseStatement: "Implementar 12+ Food Labs comunitarios con participación intergeneracional",
+      conciseStatement: "Implementar 8-10 Food Labs comunitarios con participación intergeneracional",
       tags: ["Comunidad", "Eventos", "Intergeneracional"],
-      detailedDescription: "Eventos participativos en plazas públicas que combinan cocina en vivo, intercambio de saberes y actividades culturales, con enfoque 'cero desperdicios'.",
+      detailedDescription: "Eventos participativos en plazas públicas que combinan cocina en vivo, intercambio de saberes y actividades culturales, con enfoque en producto local y tradición.",
       indicators: [
-        "4 Food Labs por ecosistema (12+ total)",
-        "600+ participantes directos (50% jóvenes, 50% mayores)",
-        "200+ kg de alimentos rescatados del desperdicio",
+        "4-5 Food Labs por ruta (8-10 total)",
+        "200+ participantes directos (50% jóvenes, 50% mayores)",
+        "80+ conexiones intergeneracionales documentadas",
         "90% de satisfacción de participantes"
       ],
-      timeline: "Meses 3-15 (coincidiendo con las rutas etnográficas)",
-      responsible: ["Equipo móvil proyecto", "Ayuntamientos locales", "Voluntarios comunidad"],
-      evaluationMethod: "Encuestas post-evento + registro fotográfico + diarios de campo"
+      timeline: "Meses 5-9 (durante las rutas etnográficas)",
+      responsible: ["Equipo móvil proyecto", "Ayuntamientos locales", "Voluntariado comunitario"],
+      evaluationMethod: "Encuestas post-evento + registro audiovisual + diarios de campo"
     },
     {
       id: 4,
-      conciseStatement: "Crear y difundir 'El Arca de los Sabores': recetario trilingüe + metodología + plataforma digital",
+      conciseStatement: "Crear y difundir recursos educativos abiertos: recetario, metodología, kit digital y vídeo",
       tags: ["Digital", "Difusión", "Sostenibilidad"],
-      detailedDescription: "Desarrollo de recursos educativos abiertos que permitan la replicación del modelo en otras regiones europeas.",
+      detailedDescription: "Desarrollo de una caja de herramientas que incluya recetario ilustrado, guía de replicabilidad, kit de herramientas digitales para turismo gastronómico y un vídeo documental del proceso.",
       indicators: [
-        "Recetario físico (500 copias) y digital (1000+ descargas)",
+        "Recetario digital + 100 copias físicas",
         "Metodología 'Food Heritage Hubs' descargable",
-        "Prototipo plataforma web/app con 300+ usuarios",
-        "10+ organizaciones solicitan información para réplica"
+        "Kit de herramientas digitales para turismo gastronómico comunitario (guías, plantillas, tutoriales)",
+        "1 vídeo documental (10-15 min)",
+        "Web básica del proyecto"
       ],
-      timeline: "Meses 12-18 (diseño) + publicación mes 18",
-      responsible: ["Germán (Tecnología)", "Diseñadores", "Traductores"],
-      evaluationMethod: "Analítica web + feedback usuarios + citaciones"
+      timeline: "Meses 2-17 (diseño continuo, publicación mes 17)",
+      responsible: ["Germán (Tecnología)", "Diseñadores", "Traductores", "Equipo comunicación"],
+      evaluationMethod: "Analítica web + feedback de usuarios + citaciones"
+    },
+    {
+      id: 5,
+      conciseStatement: "Diseñar y testear un modelo de turismo gastronómico comunitario replicable en entornos rurales europeos",
+      tags: ["Turismo sostenible", "Desarrollo rural", "Replicabilidad"],
+      detailedDescription: "A partir de la experiencia de las rutas, se elaborará una guía metodológica para que cualquier pueblo organice su propia 'ruta de sabores', incluyendo criterios de sostenibilidad, participación comunitaria y promoción digital. Se testeará en 2-3 municipios piloto.",
+      indicators: [
+        "Guía de turismo gastronómico comunitario (30+ páginas) descargable",
+        "2-3 pilotos de réplica durante el proyecto en pueblos no participantes inicialmente",
+        "10+ manifestaciones de interés de otros municipios",
+        "Inclusión del modelo en al menos 1 red de desarrollo rural"
+      ],
+      timeline: "Meses 12-18 (diseño y pilotaje)",
+      responsible: ["As Vacas Fracas", "Arci Chieti", "Equipo coordinador"],
+      evaluationMethod: "Entrevistas con agentes locales, análisis de viabilidad, encuestas a visitantes de los pilotos"
     }
   ],
 
   activities: [
     {
       id: 1,
-      title: "Ruta Mediterránea (Andalucía)",
-      description: "3 semanas documentando recetas de huerta y olivar, con Food Labs móviles en plazas públicas",
-      date: "Meses 4-5",
-      participants: "Equipo trinacional + comunidades locales",
-      linkedObjective: "O1, O3",
-      location: "Pueblos de Sevilla, Córdoba, Huelva",
-      icon: <Utensils />,
-      color: "green"
+      title: "Fase 1 · Kick-off presencial (Galicia)",
+      description: "Encuentro de las tres asociaciones en el Pazo (As Vacas Fracas). Alineación de objetivos, reparto de roles, planificación detallada.",
+      date: "Mes 1",
+      participants: "3 asociaciones (6-8 personas)",
+      linkedObjective: "O1, O2, O3, O4, O5",
+      location: "Pazo de Galicia",
+      icon: <Users />,
+      color: "purple"
     },
     {
       id: 2,
-      title: "Ruta de la Montaña (Abruzzo, Italia)",
-      description: "3 semanas documentando recetas pastoriles y de conserva, intercambio de técnicas",
-      date: "Meses 6-7",
-      participants: "Equipo trinacional + comunidades apenínicas",
+      title: "Fase 2 · Diseño de toolkit e identidad",
+      description: "Creación de guías de campo, imagen de marca, web básica, estrategia de redes y primeros contenidos del kit digital para turismo gastronómico.",
+      date: "Meses 2-3",
+      participants: "Equipo técnico + diseñadores",
+      linkedObjective: "O4, O5",
+      location: "Online + encuentros puntuales",
+      icon: <Sparkles />,
+      color: "indigo"
+    },
+    {
+      id: 3,
+      title: "Fase 3 · Test piloto + Workshop (Galicia)",
+      description: "Simulación de una jornada de ruta en el Pazo con abuelas locales. Cocina comunitaria, evaluación de metodología, ajustes antes de las rutas.",
+      date: "Mes 4",
+      participants: "Equipo consorcio + comunidad local",
       linkedObjective: "O1, O3",
-      location: "Pueblos de los Apeninos italianos",
+      location: "Pazo de Galicia",
+      icon: <ChefHat />,
+      color: "green"
+    },
+    {
+      id: 4,
+      title: "Fase 4 · Ruta Andalucía",
+      description: "7-10 días recorriendo 4-5 pueblos andaluces. Caravana, documentación de recetas, Food Labs en plazas, convivencia intergeneracional. Se identifican recursos turísticos gastronómicos locales.",
+      date: "Meses 5-6",
+      participants: "Equipo andaluz + italiano + colaboradores locales",
+      linkedObjective: "O1, O3, O5",
+      location: "Pueblos de Andalucía",
+      icon: <Car />,
+      color: "green"
+    },
+    {
+      id: 5,
+      title: "Fase 5 · Ruta Italia (Abruzzo)",
+      description: "7-10 días por pueblos de los Apeninos. Intercambio de recetas, Food Labs, grabación de testimonios y cocina colectiva. Mapeo de recursos turísticos y productores locales.",
+      date: "Meses 7-8",
+      participants: "Equipo italiano + andaluz + comunidades apenínicas",
+      linkedObjective: "O1, O3, O5",
+      location: "Pueblos de Abruzzo",
       icon: <Map />,
       color: "blue"
     },
     {
-      id: 3,
-      title: "Training Course Internacional",
-      description: "10 días intensivos para formar a 15 jóvenes como Embajadores Food Heritage",
-      date: "Mes 8",
-      participants: "15 jóvenes (5 por país) + formadores expertos",
-      linkedObjective: "O2",
-      location: "Cortijo ecológico (Sevilla)",
+      id: 6,
+      title: "Fase 6 · Workshop post-rutas",
+      description: "Encuentro presencial (Andalucía o Italia) para evaluar las rutas, extraer lecciones aprendidas, co-diseñar el Training Course y desarrollar el modelo de turismo gastronómico.",
+      date: "Mes 9",
+      participants: "Equipo consorcio + embajadores candidatos",
+      linkedObjective: "O2, O4, O5",
+      location: "Por definir",
+      icon: <BookOpen />,
+      color: "orange"
+    },
+    {
+      id: 7,
+      title: "Fase 7 · Training Course 'Embajadores Food Heritage'",
+      description: "Formación intensiva de 7 días para 8-10 jóvenes. Cocina, facilitación, comunicación y diseño de experiencias turísticas gastronómicas. Cada participante sale con un plan de réplica local.",
+      date: "Mes 10",
+      participants: "8-10 jóvenes + formadores",
+      linkedObjective: "O2, O5",
+      location: "Cortijo ecológico (Andalucía)",
       icon: <ChefHat />,
       color: "orange"
     },
     {
-      id: 4,
-      title: "Ruta Atlántica (Galicia)",
-      description: "3 semanas documentando recetas marineras y de huerta atlántica",
-      date: "Meses 9-10",
-      participants: "Equipo trinacional + comunidades gallegas",
-      linkedObjective: "O1, O3",
-      location: "Rías Baixas y Costa da Morte",
-      icon: <Car />,
-      color: "purple"
-    },
-    {
-      id: 5,
-      title: "Sistematización y co-creación",
-      description: "Edición de material, desarrollo recetario y plataforma digital",
-      date: "Meses 11-15",
-      participants: "Equipo técnico + embajadores",
-      linkedObjective: "O4",
-      location: "Online + encuentros presenciales",
-      icon: <BookOpen />,
-      color: "indigo"
-    },
-    {
-      id: 6,
-      title: "Festival Final 'El Arca de los Sabores' (Galicia)",
-      description: "Evento masivo de cierre con gran cocina comunitaria y banquete público",
-      date: "Mes 17",
-      participants: "500+ personas (público general)",
-      linkedObjective: "O4",
-      location: "Espacio emblemático en Galicia",
+      id: 8,
+      title: "Fase 8 · Evento final y cierre (Galicia)",
+      description: "Celebración anual del proyecto en el Pazo. Presentación del recetario, kit digital, guía de turismo gastronómico, proyección del vídeo documental, comida comunitaria abierta al público y networking con agentes de turismo rural.",
+      date: "Mes 12",
+      participants: "150+ personas (público general, agentes turísticos, redes desarrollo rural)",
+      linkedObjective: "O4, O5",
+      location: "Pazo de Galicia",
       icon: <Network />,
-      color: "red"
+      color: "purple"
     }
   ],
 
   tangibleResults: [
     {
       title: "Recetario 'El Arca de los Sabores'",
-      description: "Libro físico y digital trilingüe con 30+ recetas documentadas",
-      quantity: "500 copias físicas + 1000+ descargas digitales",
-      format: "ISBN + Creative Commons"
+      description: "Edición digital bilingüe (español-italiano) con 20 recetas documentadas, ilustraciones y contexto cultural. Tirada reducida de 100 copias físicas.",
+      quantity: "100 copias físicas + PDF descargable",
+      format: "ISBN / Creative Commons"
     },
     {
       title: "Metodología 'Food Heritage Hubs'",
-      description: "Kit completo para replicar el modelo en otras regiones",
-      quantity: "Guía descargable + vídeotutoriales",
-      format: "PDF interactivo + plataforma web"
+      description: "Kit de replicabilidad: guías paso a paso, plantillas, consejos y lecciones aprendidas para organizar rutas gastronómicas comunitarias.",
+      quantity: "PDF interactivo + infografías",
+      format: "Descarga gratuita"
     },
     {
-      title: "Plataforma digital interactiva",
-      description: "Web/app con recetario, mapa productores y herramienta anti-desperdicio",
-      quantity: "300+ usuarios registrados",
-      format: "Web responsive + app básica"
+      title: "Kit de herramientas digitales para el turismo gastronómico comunitario",
+      description: "Recursos prácticos (guías, plantillas, tutoriales) para que las comunidades rurales digitalicen y promocionen su patrimonio culinario como oferta turística sostenible. Incluye ejemplos de mapeo colaborativo, storytelling audiovisual y uso básico de redes sociales.",
+      quantity: "PDF interactivo + minisitio web con recursos descargables",
+      format: "Creative Commons, multidioma (ES, IT, GL)"
     },
     {
-      title: "Serie documental",
-      description: "3 documentales de 15min (1 por ecosistema) + making-of",
-      quantity: "5000+ visualizaciones estimadas",
-      format: "YouTube + DVD para centros educativos"
+      title: "Guía de turismo gastronómico comunitario",
+      description: "Modelo validado para que cualquier pueblo organice su propia 'ruta de sabores', con criterios de sostenibilidad, participación comunitaria y promoción digital. Incluye casos piloto.",
+      quantity: "Documento de 30+ páginas",
+      format: "PDF descargable"
+    },
+    {
+      title: "Vídeo documental",
+      description: "Pieza audiovisual de 10-15 minutos que resume el proceso, las rutas, los testimonios y el impacto del proyecto.",
+      quantity: "1 vídeo",
+      format: "YouTube / Vimeo"
+    },
+    {
+      title: "Web del proyecto",
+      description: "Página web sencilla con información del proyecto, recetario digital, blog, kit de herramientas y acceso a los recursos generados.",
+      quantity: "1 sitio web",
+      format: "Responsive, accesible"
     }
   ],
 
   intangibleResults: [
     {
       title: "Red de Embajadores Food Heritage",
-      description: "15 jóvenes certificados con proyectos locales en marcha",
-      impact: "12+ eventos autogestionados post-proyecto",
-      measurement: "Portfolio de proyectos + evaluaciones"
+      description: "8-10 jóvenes formados que continúan organizando eventos gastronómicos en sus comunidades, integrando el enfoque turístico.",
+      impact: "6+ eventos autogestionados post-proyecto",
+      measurement: "Portfolio de proyectos + entrevistas"
     },
     {
       title: "Conexiones intergeneracionales",
-      description: "Diálogo reconstruido entre jóvenes y mayores alrededor de la comida",
-      impact: "200+ conexiones documentadas",
-      measurement: "Testimonios + registro fotográfico"
+      description: "Vínculos reconstruidos entre jóvenes y mayores a través de la cocina y la transmisión oral.",
+      impact: "80+ conexiones documentadas",
+      measurement: "Testimonios, fotografías, diarios de campo"
     },
     {
       title: "Concienciación alimentaria crítica",
-      description: "Cambio de percepción sobre sistemas alimentarios sostenibles",
-      impact: "80% de participantes aumenta conocimiento",
-      measurement: "Encuestas pre/post + grupos focales"
+      description: "Cambio de percepción sobre la alimentación sostenible, el producto local y la cocina tradicional.",
+      impact: "80% de participantes aumentan su conocimiento",
+      measurement: "Encuestas pre/post, grupos focales"
     },
     {
-      title: "Revitalización comunitaria",
-      description: "Reactividad de espacios públicos como puntos de encuentro",
-      impact: "3 'nodos' comunitarios activos post-proyecto",
-      measurement: "Participación en eventos + compromiso municipal"
+      title: "Revitalización comunitaria y turismo sostenible",
+      description: "Espacios públicos reactivados como puntos de encuentro alrededor de la comida; pueblos piloto que incorporan las rutas como oferta cultural estable.",
+      impact: "2-3 'nodos' comunitarios activos post-proyecto, 5+ iniciativas turísticas inspiradas",
+      measurement: "Participación en eventos, compromiso municipal, manifestaciones de interés"
     }
   ]
 };
 
+// El resto del archivo (componentes, secciones, componente principal) se mantiene igual,
+// solo actualizando las referencias a los nuevos objetivos y actividades cuando sea necesario.
 // ============================================
 // 2. COMPONENTES REUTILIZABLES
 // ============================================
 
 const CollapsibleCard = ({ title, brief, children, color = "gray", icon }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   const colorClasses = {
     blue: 'border-blue-200 hover:bg-blue-50',
     green: 'border-green-200 hover:bg-green-50',
@@ -289,7 +339,7 @@ const CollapsibleCard = ({ title, brief, children, color = "gray", icon }) => {
         </div>
         <ChevronDown className={`transform transition-transform ${isExpanded ? 'rotate-180' : ''} text-gray-400`} />
       </button>
-      
+
       {isExpanded && (
         <div className="px-6 pb-6 border-t pt-6 animate-in fade-in duration-300">
           {children}
@@ -315,14 +365,14 @@ const ActivityTimelineItem = ({ activity, index, isLast }) => {
       {!isLast && (
         <div className="absolute left-6 top-12 w-0.5 h-full bg-gray-300"></div>
       )}
-      
+
       {/* Punto de timeline */}
       <div className="relative z-10">
         <div className={`w-12 h-12 bg-white border-4 rounded-full flex items-center justify-center ${colorMap[activity.color]}`}>
           <span className="font-bold text-white">{index + 1}</span>
         </div>
       </div>
-      
+
       {/* Contenido de la actividad */}
       <div className="ml-6 flex-1 pb-8">
         <div className="bg-white p-6 rounded-2xl border shadow-sm hover:shadow-md transition-shadow">
@@ -331,7 +381,7 @@ const ActivityTimelineItem = ({ activity, index, isLast }) => {
             <h3 className="font-bold text-xl text-gray-900">{activity.title}</h3>
           </div>
           <p className="text-gray-600 mb-4">{activity.description}</p>
-          
+
           {/* Metadatos */}
           <div className="flex flex-wrap gap-4 text-sm text-gray-500">
             <span className="flex items-center gap-1">
@@ -355,7 +405,7 @@ const ActivityTimelineItem = ({ activity, index, isLast }) => {
 
 const ResultCard = ({ result, type }) => {
   const isTangible = type === 'tangible';
-  
+
   return (
     <div className={`p-4 rounded-xl border ${isTangible ? 'bg-white border-green-200' : 'bg-white border-blue-200'}`}>
       <h4 className="font-bold mb-2 flex items-center gap-2">
@@ -437,28 +487,28 @@ const ImpactSection = () => {
           <p className="text-gray-600">Cambio transformador en tres niveles</p>
         </div>
         <div className="bg-gradient-to-br from-green-50 to-blue-50 p-6 rounded-2xl border border-green-200">
-          <div className="text-3xl font-bold text-green-700 mb-2">600+</div>
+          <div className="text-3xl font-bold text-green-700 mb-2">200+</div>
           <p className="text-green-600 text-sm">Participantes directos</p>
         </div>
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
         {[
-          { 
-            level: "Individual", 
-            color: "green", 
+          {
+            level: "Individual",
+            color: "green",
             icon: <Users size={20} />,
             data: projectData.impactData.individual
           },
-          { 
-            level: "Organizacional", 
-            color: "blue", 
+          {
+            level: "Organizacional",
+            color: "blue",
             icon: <Network size={20} />,
             data: projectData.impactData.organizacional
           },
-          { 
-            level: "Comunitario", 
-            color: "purple", 
+          {
+            level: "Comunitario",
+            color: "purple",
             icon: <Globe size={20} />,
             data: projectData.impactData.comunitario
           }
@@ -520,7 +570,7 @@ const ObjectivesSection = () => {
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-4">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0
-                    ${index === 0 ? 'bg-green-100 text-green-700' : 
+                    ${index === 0 ? 'bg-green-100 text-green-700' :
                       index === 1 ? 'bg-blue-100 text-blue-700' :
                       index === 2 ? 'bg-purple-100 text-purple-700' :
                       'bg-orange-100 text-orange-700'}`}>
@@ -539,7 +589,7 @@ const ObjectivesSection = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <button
                   onClick={() => toggleObjective(obj.id)}
                   className="text-gray-400 hover:text-orange-600 transition-colors"
@@ -548,7 +598,7 @@ const ObjectivesSection = () => {
                 </button>
               </div>
             </div>
-            
+
             {/* CONTENIDO EXPANDIDO */}
             {expandedObjectives[obj.id] && (
               <div className="mt-2 bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-100 rounded-2xl p-6 animate-in slide-in-from-top">
@@ -561,7 +611,7 @@ const ObjectivesSection = () => {
                       </h4>
                       <p className="text-gray-700">{obj.detailedDescription}</p>
                     </div>
-                    
+
                     <div>
                       <h4 className="font-bold text-orange-800 mb-2 flex items-center gap-2">
                         <Target size={18} /> Indicadores SMART
@@ -578,7 +628,7 @@ const ObjectivesSection = () => {
                       </ul>
                     </div>
                   </div>
-                  
+
                   {/* Columna derecha: Info adicional */}
                   <div className="space-y-4">
                     <div className="bg-white p-4 rounded-xl border">
@@ -589,7 +639,7 @@ const ObjectivesSection = () => {
                         <span className="text-gray-700">{obj.timeline}</span>
                       </div>
                     </div>
-                    
+
                     <div className="bg-white p-4 rounded-xl border">
                       <h4 className="font-bold mb-2 flex items-center gap-2">
                         <Users size={16} className="text-gray-500" /> Responsables
@@ -602,7 +652,7 @@ const ObjectivesSection = () => {
                         ))}
                       </div>
                     </div>
-                    
+
                     <div className="bg-white p-4 rounded-xl border">
                       <h4 className="font-bold mb-2 flex items-center gap-2">
                         <Heart size={16} className="text-gray-500" /> Método de evaluación
@@ -625,7 +675,7 @@ const ActivitiesSection = () => {
     <div className="space-y-8">
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-4">Actividades Planificadas</h1>
-        <p className="text-gray-600">El corazón del proyecto: 3 rutas etnográficas + eventos clave</p>
+        <p className="text-gray-600">El corazón del proyecto: 8 fases que combinan encuentros presenciales, rutas etnográficas y formación</p>
       </div>
 
       {/* Timeline visual */}
@@ -712,22 +762,22 @@ const NextStepsSection = () => {
         {[
           {
             step: "1. Revisión Interna",
-            description: "Validación del consorcio y ajustes finales",
-            deadline: "2 semanas",
+            description: "Validación del consorcio y ajustes finales de la propuesta",
+            deadline: "3 semanas",
             responsible: "Belen + Violeta",
             color: "blue"
           },
           {
             step: "2. Redacción Solicitud",
-            description: "Completar formulario oficial Erasmus+",
-            deadline: "4 semanas",
+            description: "Completar formulario oficial Erasmus+ KA210",
+            deadline: "5 semanas",
             responsible: "Equipo redacción",
             color: "green"
           },
           {
             step: "3. Presentación",
             description: "Envío a Agencia Nacional Española",
-            deadline: "5 Octubre 2025",
+            deadline: "Marzo 2026",
             responsible: "Coordinación",
             color: "purple"
           }
@@ -788,17 +838,17 @@ const ProjectPresentation = () => {
               <div className="flex flex-wrap gap-2 mt-4">
                 <span className="px-4 py-2 bg-green-100 text-green-800 rounded-full font-medium">KA210 - Asociación a Pequeña Escala</span>
                 <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">18 meses | 60.000€</span>
-                <span className="px-4 py-2 bg-purple-100 text-purple-800 rounded-full font-medium">Andalucía + Galicia + Italia</span>
+                <span className="px-4 py-2 bg-purple-100 text-purple-800 rounded-full font-medium">Andalucía · Italia · Galicia</span>
               </div>
             </div>
             <div className="text-right">
               <div className="text-2xl font-bold text-gray-900 mb-2">Consorcio</div>
               <div className="flex gap-2">
-                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"></div>
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
-                <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"></div>
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full" title="Asociación andaluza (coord.)"></div>
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full" title="Arci Chieti (Italia)"></div>
+                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" title="As Vacas Fracas (Galicia)"></div>
               </div>
+              <p className="text-xs text-gray-500 mt-1">3 socios · 2 países</p>
             </div>
           </div>
         </div>
@@ -832,8 +882,8 @@ const ProjectPresentation = () => {
 
       {/* Footer */}
       <div className="max-w-7xl mx-auto mt-8 text-center text-gray-500 text-sm">
-        <p>Proyecto KA210 - Food Heritage Hubs | Preparado para convocatoria Erasmus+ 2025</p>
-        <p className="mt-2">📅 Plazo de presentación: <strong>1 de octubre de 2025</strong></p>
+        <p>Proyecto KA210 - Food Heritage Hubs | Preparado para convocatoria Erasmus+ 2026</p>
+        <p className="mt-2">📅 Inicio previsto: <strong>octubre 2026</strong> · Plazo de solicitud: <strong>1 octubre 2026</strong></p>
       </div>
     </div>
   );
